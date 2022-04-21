@@ -8,14 +8,16 @@ node {
     }
 
     stage ('Docker: Build Image') {
-        sh 'docker build -t kahlyp/devops:latest .'
+        //sh 'docker build -t kahlyp/devops:latest .'
+        def image = docker.build('kahlyp/devops:latest')
     }
 
     stage ('Docker: Push') {
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u kahlyp -p ${dockerHubPwd}"
         }
-        sh 'docker push kahlyp/devops:latest'
+        //sh 'docker push kahlyp/devops:latest'
+        image.push()
     }
 
     stage ('Docker: Pull') {
