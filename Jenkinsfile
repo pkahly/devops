@@ -4,17 +4,17 @@ node {
     }
 
     stage ('Docker: Build Image') {
-        sh 'docker build -t pkahly/devops:latest'
+        sh 'docker build -t kahlyp/devops:latest .'
     }
 
     stage ('Docker: Push') {
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-            sh "docker login -u pkahly -p ${dockerHubPwd}"
+            sh "docker login -u kahlyp -p ${dockerHubPwd}"
         }
-        sh 'docker push pkahly/devops:latest'
+        sh 'docker push kahlyp/devops:latest'
     }
 
     stage ('Docker: Run Container in Dev') {
-        
+
     }
 }
