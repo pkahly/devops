@@ -23,6 +23,6 @@ node {
     }
 
     stage ('Docker: Run Container in Dev') {
-        echo "${image.id}"
+
     }
 }
