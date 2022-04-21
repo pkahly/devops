@@ -21,7 +21,7 @@ node {
         image.push()
     }
 
-    def image = null;
+    image = null;
     stage ('Docker: Pull') {
         image = docker.image('kahlyp/devops:latest').pull()
     }
