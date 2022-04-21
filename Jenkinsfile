@@ -18,7 +18,11 @@ node {
         sh 'docker push kahlyp/devops:latest'
     }
 
-    stage ('Docker: Run Container in Dev') {
+    stage ('Docker: Pull') {
+        def image = docker.image('kahlyp/devops:latest').pull()
+    }
 
+    stage ('Docker: Run Container in Dev') {
+        echo "${image.id}"
     }
 }
