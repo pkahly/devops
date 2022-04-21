@@ -7,9 +7,10 @@ node {
 
     }
 
+    def image = null;
     stage ('Docker: Build Image') {
         //sh 'docker build -t kahlyp/devops:latest .'
-        def image = docker.build('kahlyp/devops:latest')
+        image = docker.build('kahlyp/devops:latest')
     }
 
     stage ('Docker: Push') {
@@ -20,8 +21,9 @@ node {
         image.push()
     }
 
+    def image = null;
     stage ('Docker: Pull') {
-        def image = docker.image('kahlyp/devops:latest').pull()
+        image = docker.image('kahlyp/devops:latest').pull()
     }
 
     stage ('Docker: Run Container in Dev') {
