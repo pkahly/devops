@@ -1,4 +1,8 @@
 node {
+    stage ('Git: Checkout') {
+        git credentialsId: 'git-creds', url: 'https://github.com/pkahly/devops.git'
+    }
+
     stage ('Gradle: Build') {
 
     }
