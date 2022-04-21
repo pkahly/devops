@@ -1,21 +1,20 @@
-pipeline {
-    agent any
+node {
+    stage ('Gradle: Build') {
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
+    }
+
+    stage ('Docker: Build Image') {
+        sh 'docker build -t pkahly/devops:latest'
+    }
+
+    stage ('Docker: Push') {
+        withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+            sh "docker login -u pkahly -p ${dockerHubPwd}"
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+        sh 'docker push pkahly/devops:latest'
+    }
+
+    stage ('Docker: Run Container in Dev') {
+        
     }
 }
