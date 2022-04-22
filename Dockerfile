@@ -1,2 +1,4 @@
 FROM alpine
-RUN echo 'hello world'
+
+# install java
+RUN apk --update-cache add openjdk11
