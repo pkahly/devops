@@ -21,7 +21,8 @@ node {
 
     image = null;
     stage ('Docker: Pull') {
-        image = docker.image('kahlyp/devops:latest').pull()
+        image = docker.image('kahlyp/devops:latest')
+        image.pull()
     }
 
     stage ('Docker: Run Container in Dev') {
