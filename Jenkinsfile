@@ -9,7 +9,6 @@ node {
 
     def image = null;
     stage ('Docker: Build Image') {
-        //sh 'docker build -t kahlyp/devops:latest .'
         image = docker.build('kahlyp/devops:latest')
     }
 
@@ -17,7 +16,6 @@ node {
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u kahlyp -p ${dockerHubPwd}"
         }
-        //sh 'docker push kahlyp/devops:latest'
         image.push()
     }
 
@@ -27,6 +25,8 @@ node {
     }
 
     stage ('Docker: Run Container in Dev') {
-
+        image.inside {
+            sh 'echo test'
+        }
     }
 }
