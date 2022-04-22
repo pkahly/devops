@@ -1,10 +1,16 @@
+def GW = './gradlew'
+
 node {
     stage ('Git: Checkout') {
         git credentialsId: 'git-creds', url: 'https://github.com/pkahly/devops.git'
     }
 
     stage ('Gradle: Build') {
+        sh "${GW} build"
+    }
 
+    stage ('Gradle: Check') {
+        sh "${GW} check"
     }
 
     def image = null;
@@ -27,7 +33,7 @@ node {
 
     stage ('Docker: Run Container in Dev') {
         image.inside {
-            sh 'echo test'
+            sh "${GW} run"
         }
     }
 }
