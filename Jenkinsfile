@@ -36,6 +36,7 @@ node {
 
     stage ('Docker: Run Container in Dev') {
         image.inside {
+            sh "cd /App"
             sh "$GW run"
         }
     }
