@@ -4,6 +4,7 @@
 package app.src.test.java.devops;
 
 import org.junit.Test;
+import app.src.main.java.devops.App;
 import static org.junit.Assert.*;
 
 public class AppTest {
