@@ -1,4 +1,5 @@
-def GW = './gradlew'
+// Gradle Configuration
+env.GW = './gradlew --no-parallel --no-daemon'
 
 node {
     stage ('Git: Checkout') {
@@ -6,11 +7,11 @@ node {
     }
 
     stage ('Gradle: Build') {
-        sh "${GW} build"
+        sh "$GW build"
     }
 
     stage ('Gradle: Check') {
-        sh "${GW} check"
+        sh "$GW check"
     }
 
     def image = null;
@@ -33,7 +34,7 @@ node {
 
     stage ('Docker: Run Container in Dev') {
         image.inside {
-            sh "${GW} run"
+            sh "$GW run"
         }
     }
 }
